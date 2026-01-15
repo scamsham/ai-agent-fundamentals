@@ -4,8 +4,11 @@ from pydantic_ai.models.openai import OpenAIChatModel
 from prompt import SYSTEM_PROMPT
 import os
 from dotenv import load_dotenv
+from obs import setup_observability
 
 load_dotenv()
+
+setup_observability()
 
 agent = Agent(
     'openai:gpt-4o-mini',
@@ -31,7 +34,7 @@ async def main():
             continue
 
         if(user_query.lower() == "exit"):
-            print("Speak to you soon!")
+            print("Agent: Speak to you soon!")
             break
 
         result = await agent.run(user_prompt=user_query, message_history=conversation_history[-10:])
